@@ -1,13 +1,19 @@
 package org.example;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class RectanguloTest {
-    Rectangulo rectangulo1 = new Rectangulo(8, 2);
+    private Rectangulo rectangulo1;
+    
+    @BeforeEach
+    public void setup() {
+        rectangulo1 = new Rectangulo(8, 2);
+    }
 
     @DisplayName("Verificar que el area regresada sea correcta")
     @Test
