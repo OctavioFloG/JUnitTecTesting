@@ -9,12 +9,12 @@ class ComprobacionPasswordTest {
 
     @Test
     void testValidarEmailValido() {
-        assertTrue(comprobacionPassword.validarEmail("usuario@ejemplo.com"));
+        assertTrue(comprobacionPassword.validarEmail("usuario@gmail.com"));
     }
 
     @Test
     void testValidarEmailInvalido() {
-        assertFalse(comprobacionPassword.validarEmail("usuario@ejemplo"));
+        assertFalse(comprobacionPassword.validarEmail("usuario@gmail"));
     }
 
     @Test
