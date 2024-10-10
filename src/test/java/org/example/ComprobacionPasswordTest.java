@@ -31,6 +31,7 @@ class ComprobacionPasswordTest {
         assertFalse(comprobacionPassword.validarPassword("PASSWORD"));
     }
 
+    //Test para correo ya registrado
     @Test
     void testCorreoYaRegistrado() {
         String[] emailsRegistrados = {"usuario@ejemplo.com", "prueba@ejemplo.com"};
