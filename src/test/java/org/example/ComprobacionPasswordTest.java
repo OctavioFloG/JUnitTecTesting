@@ -19,6 +19,7 @@ class ComprobacionPasswordTest {
         assertFalse(comprobacionPassword.validarEmail("usuario@gmail"));
     }
 
+    //Test para validar contraseña valida
     @Test
     void testValidarPasswordValida() {
         assertTrue(comprobacionPassword.validarPassword("Password1"));
