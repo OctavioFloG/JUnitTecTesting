@@ -55,6 +55,20 @@ public class ComprobacionPassword {
         return false;
     }
 
+    // Método para recuperar contraseña
+    public boolean recuperarPassword(String email, String[] emailsRegistrados) {
+        // Primero genera el token y verifica si el correo está registrado
+        String token = generarTokenRecuperacion(email, emailsRegistrados);
+
+        // Si se generó el token correctamente, envía el correo de recuperación
+        if (token != null) {
+            return enviarEmailRecuperacion(email, emailsRegistrados);
+        }
+
+        // Si el correo no está registrado o no se puede generar un token, devolver false
+        return false;
+    }
+
     // Método para validar el token de recuperación
     public boolean validarToken(String token, String email) {
         return tokensRecuperacion.containsKey(email) && tokensRecuperacion.get(email).equals(token);
