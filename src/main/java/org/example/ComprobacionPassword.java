@@ -85,8 +85,6 @@ public class ComprobacionPassword {
         return false;
     }
 
-    // ----------------- Otros métodos -----------------
-
     // Método para actualizar los datos del perfil
     public boolean actualizarPerfil(String nuevoNombre, String nuevoApellido, String nuevoEmail) {
         if (nuevoNombre == null || nuevoNombre.isEmpty() ||
