@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ComprobacionPasswordTest {
 
     // HOLA.
+    // pruebas unitarias de contraseña
     ComprobacionPassword comprobacionPassword = new ComprobacionPassword();
 
     @Test
