@@ -1,12 +1,17 @@
 package org.example;
 
 import java.util.regex.Pattern;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class ComprobacionPassword {
 
     // Patrón para validar el correo electrónico con una extensión válida
     private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
+
+    // Mapa para almacenar los tokens de recuperación asociados a los correos electrónicos
+    private HashMap<String, String> tokensRecuperacion = new HashMap<>();
 
     // Método para validar el correo electrónico
     public boolean validarEmail(String email) {
@@ -30,36 +35,62 @@ public class ComprobacionPassword {
         return false;
     }
 
-    // Método para recuperación de contraseña
-    public boolean recuperarPassword(String email, String[] emailsRegistrados) {
-        return correoRegistrado(email, emailsRegistrados);
+    // Método para generación de token de recuperación
+    public String generarTokenRecuperacion(String email, String[] emailsRegistrados) {
+        if (correoRegistrado(email, emailsRegistrados)) {
+            String token = UUID.randomUUID().toString(); // Genera un token único
+            tokensRecuperacion.put(email, token); // Asocia el token con el correo
+            return token;
+        }
+        return null; // Si el correo no está registrado, no genera token
     }
 
-    // ----------------- Expansión para la tercera historia de usuario -----------------
+    // Método simulado para enviar el correo de recuperación
+    public boolean enviarEmailRecuperacion(String email, String[] emailsRegistrados) {
+        String token = generarTokenRecuperacion(email, emailsRegistrados);
+        if (token != null) {
+            System.out.println("Enlace de recuperación: www.tusitio.com/recuperar?token=" + token);
+            return true;
+        }
+        return false;
+    }
+
+    // Método para validar el token de recuperación
+    public boolean validarToken(String token, String email) {
+        return tokensRecuperacion.containsKey(email) && tokensRecuperacion.get(email).equals(token);
+    }
+
+    // Método para restablecer la contraseña
+    public boolean restablecerPassword(String token, String email, String nuevaPassword, String confirmacionPassword) {
+        if (validarToken(token, email) && validarPassword(nuevaPassword) && nuevaPassword.equals(confirmacionPassword)) {
+            // Aquí iría la lógica para actualizar la contraseña en la base de datos
+            tokensRecuperacion.remove(email); // Remueve el token después de usarlo
+            System.out.println("Contraseña actualizada correctamente para: " + email);
+            return true;
+        }
+        return false;
+    }
+
+    // ----------------- Otros métodos -----------------
 
     // Método para actualizar los datos del perfil
     public boolean actualizarPerfil(String nuevoNombre, String nuevoApellido, String nuevoEmail) {
-        // Validar que los campos no estén vacíos y que el correo sea válido
         if (nuevoNombre == null || nuevoNombre.isEmpty() ||
                 nuevoApellido == null || nuevoApellido.isEmpty() ||
                 !validarEmail(nuevoEmail)) {
             return false;
         }
-        // Si todos los datos son válidos, se simula la actualización
         return true;
     }
 
     // Método para cambiar la contraseña
     public boolean cambiarPassword(String actualPassword, String nuevaPassword, String confirmacionPassword, String passwordCorrectaActual) {
         if (!actualPassword.equals(passwordCorrectaActual)) {
-            // La contraseña actual no es correcta
             return false;
         }
-        // Validar que la nueva contraseña cumpla con los requisitos
         if (!validarPassword(nuevaPassword) || !nuevaPassword.equals(confirmacionPassword)) {
             return false;
         }
-        // Si todo es correcto, la contraseña se actualiza
         return true;
     }
 
