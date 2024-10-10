@@ -7,8 +7,9 @@ public class ParseadorTest {
 
     private final Parseador parseador = new Parseador();
 
+    @DisplayName("Obtener el numero del primer termino")
     @Test
-    public void obtenerParte1Unidades() {
+    public void obtenerParte1() {
 
         String ecuacion1 = "2x - 1 = 0";
 
@@ -18,8 +19,10 @@ public class ParseadorTest {
     }
 
 
+    @DisplayName("Obtener el numero del segundo termino")
+
     @Test
-    public void obtenerParte2Suma() {
+    public void obtenerParte2() {
 
         String ecuacion1 = "2x + 1 = 0";
 
@@ -28,8 +31,10 @@ public class ParseadorTest {
         assertEquals(1, resultado);
     }
 
+    @DisplayName("Obtener el numero del tercer termino")
+
     @Test
-    public void obtenerParte3Positivo() {
+    public void obtenerParte3() {
 
         String ecuacion1 = "2x + 1 = 3";
 
@@ -40,6 +45,7 @@ public class ParseadorTest {
 
     EcuacionPrimerGrado ecuacion = new EcuacionPrimerGrado();
 
+    @DisplayName("Obtener el operando \"+\"")
     @Test
     public void obtenerOperadorSuma() {
 
@@ -50,6 +56,18 @@ public class ParseadorTest {
         assertEquals("+", operador);
     }
 
+    @DisplayName("Obtener el operando \"-\"")
+    @Test
+    public void obtenerOperadorResta() {
+
+        String ecuacion2 = "2x - 1 = 0";
+
+        String operador = parseador.obtenerOperador(ecuacion2);
+
+        assertEquals("-", operador);
+    }
+
+    @DisplayName("Soluciona ecuaciones lineales con operando -")
     @Test
     public void solucionaEcuacionConMenos() {
 
@@ -60,6 +78,7 @@ public class ParseadorTest {
         assertEquals(valueExpected, result);
     }
 
+    @DisplayName("Soluciona ecuaciones lineales con operando +")
     @Test
     public void solucionaEcuacionConMas() {
 
@@ -70,6 +89,7 @@ public class ParseadorTest {
         assertEquals(valueExpected, result);
     }
 
+    @DisplayName("Soluciona ecuaciones con la tercera parte != 0")
     @Test
     public void solucionaEcuacionConParte3Mayor0() {
 
