@@ -54,6 +54,20 @@ class ComprobacionPasswordTest {
     }
 
     @Test
+    void testRestablecerPasswordExitoso() {
+        String[] emailsRegistrados = {"usuario@ejemplo.com", "prueba@ejemplo.com"};
+        comprobacionPassword.generarTokenRecuperacion("usuario@ejemplo.com", emailsRegistrados);
+        String token = comprobacionPassword.generarTokenRecuperacion("usuario@ejemplo.com", emailsRegistrados);
+
+        assertTrue(comprobacionPassword.restablecerPassword(token, "usuario@ejemplo.com", "NewPass1", "NewPass1"));
+    }
+
+    @Test
+    void testRestablecerPasswordFalloTokenInvalido() {
+        assertFalse(comprobacionPassword.restablecerPassword("tokenInvalido", "usuario@ejemplo.com", "NewPass1", "NewPass1"));
+    }
+
+    @Test
     void testActualizarPerfilExitoso() {
         assertTrue(comprobacionPassword.actualizarPerfil("Juan", "Pérez", "juan.perez@ejemplo.com"));
     }
