@@ -25,6 +25,7 @@ class ComprobacionPasswordTest {
         assertTrue(comprobacionPassword.validarPassword("Password1"));
     }
 
+    //Test para validar contraseña invalida
     @Test
     void testValidarPasswordInvalida() {
         assertFalse(comprobacionPassword.validarPassword("pass1"));
