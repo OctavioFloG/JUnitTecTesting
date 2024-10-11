@@ -3,9 +3,29 @@ package org.example;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.junit.jupiter.api.Test;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+@ExtendWith(MockitoExtension.class)
 public class ParseadorTest {
 
     private final Parseador parseador = new Parseador();
+
+    @Mock
+    Parseador parseador1;
+
+    @DisplayName("Obtener los dos operandos de una ecuacion lineal de 4 terminos")
+    @Test
+    public void obtenerOperandos3terminos(){
+
+        String ecuacion1 = "2x - 1 + 4 = 0";
+        Mockito.when(parseador1.Obtener2Operandos(ecuacion1)).thenReturn("+ -");
+        final String operador = parseador1.Obtener2Operandos(ecuacion1);
+        assertEquals("+ -", operador);
+    }
 
     @DisplayName("Obtener el numero del primer termino")
     @Test
