@@ -1,6 +1,11 @@
 package org.example;
 
 public class Parseador {
+    //----------------------Metodo sin terminar---------------------
+    public String Obtener2Operandos(String ecuacion) {
+        return null;
+    }
+
     public int obtenerParte1(final String ecuacion) {
 
         String[] partes1 = obtenerPartes12(ecuacion);
