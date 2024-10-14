@@ -8,7 +8,7 @@ class ComprobacionPasswordTest {
     // HOLA.
     // pruebas unitarias de contraseña
     ComprobacionPassword comprobacionPassword = new ComprobacionPassword();
-//validacion email
+    //Test para validar Email
     @Test
     void testValidarEmailValido() {
         assertTrue(comprobacionPassword.validarEmail("usuario@gmail.com"));
@@ -19,11 +19,13 @@ class ComprobacionPasswordTest {
         assertFalse(comprobacionPassword.validarEmail("usuario@gmail"));
     }
 
+    //Test para validar contraseña valida
     @Test
     void testValidarPasswordValida() {
         assertTrue(comprobacionPassword.validarPassword("Password1"));
     }
 
+    //Test para validar contraseña invalida
     @Test
     void testValidarPasswordInvalida() {
         assertFalse(comprobacionPassword.validarPassword("pass1"));
@@ -31,6 +33,7 @@ class ComprobacionPasswordTest {
         assertFalse(comprobacionPassword.validarPassword("PASSWORD"));
     }
 
+    //Test para correo ya registrado
     @Test
     void testCorreoYaRegistrado() {
         String[] emailsRegistrados = {"usuario@ejemplo.com", "prueba@ejemplo.com"};
